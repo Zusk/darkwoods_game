@@ -1,0 +1,87 @@
+{
+  "format": 1,
+  "restore": {
+    "/media/yazu/Games/RogueGame/New3/AdventureGame/DarkWoods/DarkWoods/MyGame.csproj": {}
+  },
+  "projects": {
+    "/media/yazu/Games/RogueGame/New3/AdventureGame/DarkWoods/DarkWoods/MyGame.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/media/yazu/Games/RogueGame/New3/AdventureGame/DarkWoods/DarkWoods/MyGame.csproj",
+        "projectName": "MyGame",
+        "projectPath": "/media/yazu/Games/RogueGame/New3/AdventureGame/DarkWoods/DarkWoods/MyGame.csproj",
+        "packagesPath": "/home/zusk/.nuget/packages/",
+        "outputPath": "/media/yazu/Games/RogueGame/New3/AdventureGame/DarkWoods/DarkWoods/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/zusk/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "CSCore": {
+              "target": "Package",
+              "version": "[1.2.1.2, )"
+            },
+            "MonoGame.Framework.DesktopGL": {
+              "target": "Package",
+              "version": "[3.8.1.303, )"
+            },
+            "NAudio": {
+              "target": "Package",
+              "version": "[2.2.1, )"
+            },
+            "SadConsole.Extended": {
+              "target": "Package",
+              "version": "[10.0.3, )"
+            },
+            "SadConsole.Host.MonoGame": {
+              "target": "Package",
+              "version": "[10.0.3, )"
+            },
+            "System.Windows.Extensions": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/home/zusk/.dotnet/sdk/8.0.101/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
