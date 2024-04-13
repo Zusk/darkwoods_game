@@ -1,19 +1,26 @@
-﻿//Default Program provided by SadConsole. This facilitates some base functionality of the SadConsole app.
+﻿using SadConsole;
 using SadConsole.Configuration;
 
-//This is where we define our window title.
-Settings.WindowTitle = "https://github.com/Zusk/darkwoods_game";
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Setup SadConsole configuration
+        Settings.WindowTitle = "Darkwoods Game";
+        var gameStartup = new Builder()
+            .SetScreenSize(GameSettings.GAME_WIDTH, GameSettings.GAME_HEIGHT)
+            .SetStartingScreen<AdventureGame.Scenes.RootScreen>()
+            .IsStartingScreenFocused(true)
+            .ConfigureFonts(true);
 
-//This is where we assign our screen size, starting screen, and if the screen is focused.
-Builder gameStartup = new Builder()
-    .SetScreenSize(GameSettings.GAME_WIDTH, GameSettings.GAME_HEIGHT)
-    .SetStartingScreen<AdventureGame.Scenes.RootScreen>()
-    .IsStartingScreenFocused(true)
-    .ConfigureFonts(true)
-    ;
+        // Create and start the game
+        Game.Create(gameStartup);
 
-//Backend functionality to create the window.
-Game.Create(gameStartup);
-Game.Instance.Run();
-//Cleanup method
-Game.Instance.Dispose();
+        // Initialize AudioManager after Game has been created
+        AudioManager.Initialize();
+
+        // Run the game
+        Game.Instance.Run();
+        Game.Instance.Dispose();
+    }
+}

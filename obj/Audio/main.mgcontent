@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>/media/yazu/DarkWoods/darkwoods_game/Audio/main.ogg</SourceFile>
+  <SourceTime>2024-04-13T04:46:34.9298454-04:00</SourceTime>
+  <DestFile>/media/yazu/DarkWoods/darkwoods_game/net8.0/Database/Audio/main.xnb</DestFile>
+  <DestTime>2024-04-13T04:48:35.0428944-04:00</DestTime>
+  <Importer>OggImporter</Importer>
+  <ImporterTime>2022-07-26T07:44:56-04:00</ImporterTime>
+  <Processor>SongProcessor</Processor>
+  <ProcessorTime>2022-07-26T07:44:56-04:00</ProcessorTime>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput>
+    <string>/media/yazu/DarkWoods/darkwoods_game/net8.0/Database/Audio/main.wma</string>
+  </BuildOutput>
+</PipelineBuildEvent>

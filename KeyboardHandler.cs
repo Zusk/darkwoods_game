@@ -1,8 +1,10 @@
 //This script is mostly from the SadConsole demo file, but I reworked it to remove functionality tied to the demo itself.
 //Lots of these comments are from the original file! I just added a few to try to clarify how exactly this works.
-using System.Security.Cryptography.X509Certificates;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 using SadConsole.Components;
 using SadConsole.UI;
+
 
 internal class KeyboardHandlers : ControlsConsole
 {
@@ -67,6 +69,12 @@ internal class KeyboardHandlers : ControlsConsole
 
         _keyboardHandlerDOS.Prompt = "Prompt> ";
         _keyboardHandlerDOS.IsReady = true;
+
+
+        // Load music and other content.
+        //Song backgroundMusic = Content.Load<Song>("backgroundMusic"); // Make sure "backgroundMusic" matches the asset name in your Content project.
+        //MediaPlayer.Play(backgroundMusic);
+        //MediaPlayer.IsRepeating = true; // Loop the background music
 
     }
 

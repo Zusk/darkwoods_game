@@ -1,0 +1,15 @@
+#----------------------------- Global Properties -----------------------------
+/outputDir:net8.0/Database
+/intermediateDir:obj
+/platform:Windows
+/config:
+/profile:Reach
+/compress:False
+
+#-------------------------------- References --------------------------------
+
+#---------------------------------- Content ---------------------------------
+# Audio Content
+/importer:OggImporter
+/processor:SongProcessor
+/build:Audio/main.ogg
