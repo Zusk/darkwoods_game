@@ -43,13 +43,13 @@ public abstract class Location
     {
         return direction switch
         {
-            Direction.North => "To our [c:r f:Cyan]north[c:undo]",
-            Direction.South => "To our [c:r f:Cyan]south[c:undo]",
-            Direction.East => "To our [c:r f:Cyan]east[c:undo]",
-            Direction.West => "To our [c:r f:Cyan]west[c:undo]",
-            Direction.Up => "Above us",
-            Direction.Down => "Below us",
-            _ => "In an unknown direction"
+            Direction.North => GameStrings.LOCATION_NORTH,
+            Direction.South => GameStrings.LOCATION_SOUTH,
+            Direction.East => GameStrings.LOCATION_EAST,
+            Direction.West => GameStrings.LOCATION_WEST,
+            Direction.Up => GameStrings.LOCATION_UP,
+            Direction.Down => GameStrings.LOCATION_DOWN,
+            _ => GameStrings.LOCATION_CANT_GO_THAT_WAY
         };
     }
 
