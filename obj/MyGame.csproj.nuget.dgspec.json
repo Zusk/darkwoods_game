@@ -38,10 +38,6 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "CSCore": {
-              "target": "Package",
-              "version": "[1.2.1.2, )"
-            },
             "MonoGame.Framework.DesktopGL": {
               "target": "Package",
               "version": "[3.8.1.303, )"
@@ -57,10 +53,6 @@
             "SadConsole.Host.MonoGame": {
               "target": "Package",
               "version": "[10.4.0, )"
-            },
-            "System.Windows.Extensions": {
-              "target": "Package",
-              "version": "[8.0.0, )"
             }
           },
           "imports": [

@@ -24,19 +24,6 @@
           }
         }
       },
-      "CSCore/1.2.1.2": {
-        "type": "package",
-        "compile": {
-          "lib/net35-client/CSCore.dll": {
-            "related": ".XML"
-          }
-        },
-        "runtime": {
-          "lib/net35-client/CSCore.dll": {
-            "related": ".XML"
-          }
-        }
-      },
       "MonoGame.Framework.DesktopGL/3.8.1.303": {
         "type": "package",
         "compile": {
@@ -189,25 +176,6 @@
           }
         }
       },
-      "System.Windows.Extensions/8.0.0": {
-        "type": "package",
-        "compile": {
-          "lib/net8.0/System.Windows.Extensions.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/System.Windows.Extensions.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtimeTargets": {
-          "runtimes/win/lib/net8.0/System.Windows.Extensions.dll": {
-            "assetType": "runtime",
-            "rid": "win"
-          }
-        }
-      },
       "TheSadRogue.Primitives/1.6.0-rc3": {
         "type": "package",
         "compile": {
@@ -253,19 +221,6 @@
         "lib/net6.0/Coroutine.xml",
         "lib/netstandard2.0/Coroutine.dll",
         "lib/netstandard2.0/Coroutine.xml"
-      ]
-    },
-    "CSCore/1.2.1.2": {
-      "sha512": "DoQKUcdZLQawo3mOg8CvujJD9YkvTt6NtEu7S+OCo8+ySl8eCeUw4LFyL2E1OcAkPU918HZM6sUNcvIMcXWg6g==",
-      "type": "package",
-      "path": "cscore/1.2.1.2",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "cscore.1.2.1.2.nupkg.sha512",
-        "cscore.nuspec",
-        "lib/net35-client/CSCore.XML",
-        "lib/net35-client/CSCore.dll"
       ]
     },
     "MonoGame.Framework.DesktopGL/3.8.1.303": {
@@ -444,33 +399,6 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "System.Windows.Extensions/8.0.0": {
-      "sha512": "Obg3a90MkOw9mYKxrardLpY2u0axDMrSmy4JCdq2cYbelM2cUwmUir5Bomvd1yxmPL9h5LVHU1tuKBZpUjfASg==",
-      "type": "package",
-      "path": "system.windows.extensions/8.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
-        "lib/net6.0/System.Windows.Extensions.dll",
-        "lib/net6.0/System.Windows.Extensions.xml",
-        "lib/net7.0/System.Windows.Extensions.dll",
-        "lib/net7.0/System.Windows.Extensions.xml",
-        "lib/net8.0/System.Windows.Extensions.dll",
-        "lib/net8.0/System.Windows.Extensions.xml",
-        "runtimes/win/lib/net6.0/System.Windows.Extensions.dll",
-        "runtimes/win/lib/net6.0/System.Windows.Extensions.xml",
-        "runtimes/win/lib/net7.0/System.Windows.Extensions.dll",
-        "runtimes/win/lib/net7.0/System.Windows.Extensions.xml",
-        "runtimes/win/lib/net8.0/System.Windows.Extensions.dll",
-        "runtimes/win/lib/net8.0/System.Windows.Extensions.xml",
-        "system.windows.extensions.8.0.0.nupkg.sha512",
-        "system.windows.extensions.nuspec",
-        "useSharedDesignerContext.txt"
-      ]
-    },
     "TheSadRogue.Primitives/1.6.0-rc3": {
       "sha512": "w+822nVlmmcKTAl8YFMA9THxz9mCRDWjs3f2jRrHPHSvpmTllt2TJAYDgmMCkSYQpg9PAaKTBBV/x7OH6fqhHQ==",
       "type": "package",
@@ -495,12 +423,10 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "CSCore >= 1.2.1.2",
       "MonoGame.Framework.DesktopGL >= 3.8.1.303",
       "SadConsole >= 10.4.0",
       "SadConsole.Extended >= 10.4.0",
-      "SadConsole.Host.MonoGame >= 10.4.0",
-      "System.Windows.Extensions >= 8.0.0"
+      "SadConsole.Host.MonoGame >= 10.4.0"
     ]
   },
   "packageFolders": {
@@ -540,10 +466,6 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
-          "CSCore": {
-            "target": "Package",
-            "version": "[1.2.1.2, )"
-          },
           "MonoGame.Framework.DesktopGL": {
             "target": "Package",
             "version": "[3.8.1.303, )"
@@ -559,10 +481,6 @@
           "SadConsole.Host.MonoGame": {
             "target": "Package",
             "version": "[10.4.0, )"
-          },
-          "System.Windows.Extensions": {
-            "target": "Package",
-            "version": "[8.0.0, )"
           }
         },
         "imports": [
@@ -584,17 +502,5 @@
         "runtimeIdentifierGraphPath": "/home/zusk/.dotnet/sdk/8.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'CSCore 1.2.1.2' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
-      "libraryId": "CSCore",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    }
-  ]
+  }
 }

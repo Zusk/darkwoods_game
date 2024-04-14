@@ -1,12 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "pJ8a2FM/yPmMk8kdgCbdZFXHlWhNTt085XdnxqrEpyA2FrbF4A7hcZMgsv8lGSjo6xsUmWZzuSY+qf9y5fO8LQ==",
+  "dgSpecHash": "ZybCXLQnJ9Ba2ekqpIU7Re8hXs9OiTPgRXzqSo5HXBycAv2l/ICPeJKP9apKoAuFMHwwe5l5Di/Sa1iRl0jMRQ==",
   "success": true,
   "projectFilePath": "/media/yazu/DarkWoods/darkwoods_game/MyGame.csproj",
   "expectedPackageFiles": [
     "/home/zusk/.nuget/packages/colorminestandard/1.0.0/colorminestandard.1.0.0.nupkg.sha512",
     "/home/zusk/.nuget/packages/coroutine/2.1.5/coroutine.2.1.5.nupkg.sha512",
-    "/home/zusk/.nuget/packages/cscore/1.2.1.2/cscore.1.2.1.2.nupkg.sha512",
     "/home/zusk/.nuget/packages/monogame.framework.desktopgl/3.8.1.303/monogame.framework.desktopgl.3.8.1.303.nupkg.sha512",
     "/home/zusk/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512",
     "/home/zusk/.nuget/packages/sadconsole/10.4.0/sadconsole.10.4.0.nupkg.sha512",
@@ -14,19 +13,7 @@
     "/home/zusk/.nuget/packages/sadconsole.host.monogame/10.4.0/sadconsole.host.monogame.10.4.0.nupkg.sha512",
     "/home/zusk/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "/home/zusk/.nuget/packages/system.text.encoding.codepages/6.0.0/system.text.encoding.codepages.6.0.0.nupkg.sha512",
-    "/home/zusk/.nuget/packages/system.windows.extensions/8.0.0/system.windows.extensions.8.0.0.nupkg.sha512",
     "/home/zusk/.nuget/packages/thesadrogue.primitives/1.6.0-rc3/thesadrogue.primitives.1.6.0-rc3.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'CSCore 1.2.1.2' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
-      "libraryId": "CSCore",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    }
-  ]
+  "logs": []
 }
