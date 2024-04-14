@@ -67,7 +67,7 @@ internal class KeyboardHandlers : ControlsConsole
         // Print the combined text
         cursor.Print(combinedText).NewLine();
 
-        _keyboardHandlerDOS.Prompt = "Prompt> ";
+        _keyboardHandlerDOS.Prompt = "Prompt:";
         _keyboardHandlerDOS.IsReady = true;
 
     }
@@ -95,12 +95,15 @@ internal class KeyboardHandlers : ControlsConsole
         // this in any method object anywhere, but we've implemented it on this console directly.
         _keyboardHandlerDOS.EnterPressedAction = DOSHandlerEnterPressed;
 
+        //_keyboardHandlerDOS.IsReady = false;
         // Disable the cursor since our keyboard handler will do the work.
         Cursor cursor = _promptScreen.GetSadComponent<Cursor>()!;
+        cursor.DisableWordBreak = false;
         //'Is Ready' is a hardcoded bool in the keyboard handler script that determines if the component is valid.
+
         //_keyboardHandlerDOS.IsReady = false;
         //cursor.Print("Try typing in the following commands: help, ver, cls, look. If you type exit or quit, the program will end.").NewLine();
-        //_keyboardHandlerDOS.Prompt = "Prompt> ";
+        //_keyboardHandlerDOS.Prompt = "Prompt :";
         _keyboardHandlerDOS.IsReady = true;
         _promptScreen.Surface.TimesShiftedUp = 0;
     }
@@ -108,6 +111,7 @@ internal class KeyboardHandlers : ControlsConsole
     //This method is called by our KeyBoardHandler when the enter key is pressed.
     private void DOSHandlerEnterPressed(ClassicConsoleKeyboardHandler keyboardComponent, Cursor cursor, string value)
     {
+        //cursor.DisableWordBreak = false;
         value = value.ToLower().Trim();
         System.Console.WriteLine(value);  // Output the trimmed, lowercased value for debugging.
         string outputText;
@@ -116,11 +120,9 @@ internal class KeyboardHandlers : ControlsConsole
         {
             case GameStrings.COMMAND_LOOK:
                 // Handle the 'look' command: Provide a description of the current location along with available directions.
-                cursor.DisableWordBreak = false;
                 outputText = GameWorld.Instance.Player.CurrentLocation.GetDescription() +
                             " " + GameWorld.Instance.Player.CurrentLocation.ListDirections();
                 PrinterText(cursor, keyboardComponent, outputText);
-                cursor.DisableWordBreak = true;
                 break;
             
             case GameStrings.COMMAND_DIRECTIONS:
