@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/media/yazu/Games/RogueGame/New3/AdventureGame/DarkWoods/DarkWoods/MyGame.csproj": {}
+    "/media/yazu/DarkWoods/darkwoods_game/MyGame.csproj": {}
   },
   "projects": {
-    "/media/yazu/Games/RogueGame/New3/AdventureGame/DarkWoods/DarkWoods/MyGame.csproj": {
+    "/media/yazu/DarkWoods/darkwoods_game/MyGame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/media/yazu/Games/RogueGame/New3/AdventureGame/DarkWoods/DarkWoods/MyGame.csproj",
+        "projectUniqueName": "/media/yazu/DarkWoods/darkwoods_game/MyGame.csproj",
         "projectName": "MyGame",
-        "projectPath": "/media/yazu/Games/RogueGame/New3/AdventureGame/DarkWoods/DarkWoods/MyGame.csproj",
+        "projectPath": "/media/yazu/DarkWoods/darkwoods_game/MyGame.csproj",
         "packagesPath": "/home/zusk/.nuget/packages/",
-        "outputPath": "/media/yazu/Games/RogueGame/New3/AdventureGame/DarkWoods/DarkWoods/obj/",
+        "outputPath": "/media/yazu/DarkWoods/darkwoods_game/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/zusk/.nuget/NuGet/NuGet.Config"
@@ -46,17 +46,17 @@
               "target": "Package",
               "version": "[3.8.1.303, )"
             },
-            "NAudio": {
+            "SadConsole": {
               "target": "Package",
-              "version": "[2.2.1, )"
+              "version": "[10.4.0, )"
             },
             "SadConsole.Extended": {
               "target": "Package",
-              "version": "[10.0.3, )"
+              "version": "[10.4.0, )"
             },
             "SadConsole.Host.MonoGame": {
               "target": "Package",
-              "version": "[10.0.3, )"
+              "version": "[10.4.0, )"
             },
             "System.Windows.Extensions": {
               "target": "Package",
