@@ -111,7 +111,6 @@ internal class KeyboardHandlers : ControlsConsole
     //This method is called by our KeyBoardHandler when the enter key is pressed.
     private void DOSHandlerEnterPressed(ClassicConsoleKeyboardHandler keyboardComponent, Cursor cursor, string value)
     {
-        //cursor.DisableWordBreak = false;
         value = value.ToLower().Trim();
         System.Console.WriteLine(value);  // Output the trimmed, lowercased value for debugging.
         string outputText;
