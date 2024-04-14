@@ -3,13 +3,12 @@ namespace AdventureGame;
 
 public class Darkwood : Location
 {
-    public Darkwood() : base("[c:r f:Cyan]Dark Wood[c:undo]")
+    public Darkwood() : base(GameStrings.DARK_WOOD_NAME)
     {
-        // Initialize Dark Wood specific details here
     }
 
     public override string GetDescription()
     {
-        return "The Dark Wood is dense and foreboding, the thick canopy above allows little light to reach the forest floor.";
+        return GameStrings.DARK_WOOD_DESC;
     }
 }

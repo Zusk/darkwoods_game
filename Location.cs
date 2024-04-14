@@ -2,31 +2,49 @@ using System;
 using System.Collections.Generic;
 namespace AdventureGame;
 
-// Base class for locations
+/// <summary>
+/// Represents a location in the adventure game. This is an abstract base class.
+/// </summary>
 public abstract class Location
 {
     public string Name { get; set; }
     public Dictionary<Direction, Location> Neighbors { get; set; }
 
+    /// <summary>
+    /// Constructor for the location.
+    /// </summary>
+    /// <param name="name">The name of the location.</param>
     protected Location(string name)
     {
         Name = name;
         Neighbors = new Dictionary<Direction, Location>();
     }
 
-    // Add a neighbor to the location
+    /// <summary>
+    /// Adds a neighboring location to this location.
+    /// </summary>
+    /// <param name="direction">The direction in which the neighbor is located.</param>
+    /// <param name="neighbor">The neighboring location.</param>
     public void AddNeighbor(Direction direction, Location neighbor)
     {
         Neighbors[direction] = neighbor;
     }
 
-    // Method to get a description of the location
+    /// <summary>
+    /// Returns a description of the location.
+    /// Format: "You are at the [Location Name]."
+    /// </summary>
+    /// <returns>Description of the location.</returns>
     public virtual string GetDescription()
     {
-        return $"You are at the {Name}.";
+        return $"{GameStrings.DESCRIPTION_PREFIX}{Name}.";
     }
 
-    // New method to list directions
+    /// <summary>
+    /// Lists all directions from the current location to its neighbors.
+    /// Format: "[Direction] is [Neighbor Name], [Direction] is [Neighbor Name], ..."
+    /// </summary>
+    /// <returns>Comma-separated string listing all accessible directions and their corresponding locations.</returns>
     public string ListDirections()
     {
         var directions = new List<string>();
@@ -38,7 +56,11 @@ public abstract class Location
         return string.Join(", ", directions);
     }
 
-    // Helper method to convert Direction enum to a readable string
+    /// <summary>
+    /// Converts a Direction enum value to a string representation using game constants.
+    /// </summary>
+    /// <param name="direction">The direction to convert.</param>
+    /// <returns>Formatted string indicating the direction.</returns>
     private string DirectionToString(Direction direction)
     {
         return direction switch
@@ -49,21 +71,27 @@ public abstract class Location
             Direction.West => GameStrings.LOCATION_WEST,
             Direction.Up => GameStrings.LOCATION_UP,
             Direction.Down => GameStrings.LOCATION_DOWN,
-            _ => GameStrings.LOCATION_CANT_GO_THAT_WAY
+            _ => GameStrings.LOCATION_UNKNOWN_DIRECTION
         };
     }
 
-    // Method to navigate to a neighbor
-    // Returns a tuple containing the new Location and a message about the move
+    /// <summary>
+    /// Attempts to move the player to a neighboring location in the specified direction.
+    /// Returns a tuple containing the new location and a movement message.
+    /// Format: "You move [Direction] to the [Location Name]."
+    /// If movement is not possible, returns a message "You can't go that way."
+    /// </summary>
+    /// <param name="direction">The direction in which to move.</param>
+    /// <returns>A tuple with the new location and a descriptive movement message.</returns>
     public (Location newLocation, string message) Move(Direction direction)
     {
         if (Neighbors.ContainsKey(direction))
         {
-            return (Neighbors[direction], $"You move {direction} to the {Neighbors[direction].Name}.");
+            return (Neighbors[direction], $"{GameStrings.MOVE_PREFIX}{direction}{GameStrings.MOVE_POSTFIX}{Neighbors[direction].Name}.");
         }
         else
         {
-            return (this, "You can't go that way.");
+            return (this, GameStrings.LOCATION_CANT_GO_THAT_WAY);
         }
     }
 }

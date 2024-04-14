@@ -2,13 +2,12 @@ using System.Collections.Generic;
 namespace AdventureGame;
 public class DungeonMasterTower1 : Location
 {
-    public DungeonMasterTower1() : base("[c:r f:Cyan]Dungeon Master's Tower[c:undo]")
+    public DungeonMasterTower1() : base(GameStrings.DUNGEON_MASTER_TOWER1_NAME)
     {
-        // Initialize Dungeon Master's Tower Level 1 specific details here
     }
 
     public override string GetDescription()
     {
-        return "This is the first level of the Dungeon Master's Tower. It hums with arcane energy and the echoes of past battles.";
+        return GameStrings.DUNGEON_MASTER_TOWER1_DESC;
     }
 }

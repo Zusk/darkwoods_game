@@ -1,8 +1,8 @@
 //This script is mostly from the SadConsole demo file, but I reworked it to remove functionality tied to the demo itself.
 //Lots of these comments are from the original file! I just added a few to try to clarify how exactly this works.
-using System.Security.Cryptography.X509Certificates;
 using SadConsole.Components;
 using SadConsole.UI;
+using AdventureGame;
 
 internal class KeyboardHandlers : ControlsConsole
 {
@@ -54,12 +54,14 @@ internal class KeyboardHandlers : ControlsConsole
         // Combine the strings
         string locationDescription = GameWorld.Instance.Player.CurrentLocation.GetDescription();
         SadConsole.ColoredString directionList = SadConsole.ColoredString.Parser.Parse(GameWorld.Instance.Player.CurrentLocation.ListDirections());
-        string commands = "                 COMMANDS: move [dir], help, cls, ver";
+
+        cursor.Print(SadConsole.ColoredString.Parser.Parse(GameStrings.GAME_NAME)).NewLine();
+        cursor.NewLine();
 
         // Combine them into one ColoredString
         SadConsole.ColoredString combinedText = new SadConsole.ColoredString(locationDescription) + " "
                                             + directionList
-                                            + new SadConsole.ColoredString(commands);
+                                            + SadConsole.ColoredString.Parser.Parse(GameStrings.GAME_START_LIST_COMMANDS);
 
 
         // Print the combined text
@@ -103,72 +105,81 @@ internal class KeyboardHandlers : ControlsConsole
         _promptScreen.Surface.TimesShiftedUp = 0;
     }
 
-    //This is called by our KeyBoardHandler when we press enter.
+    //This method is called by our KeyBoardHandler when the enter key is pressed.
     private void DOSHandlerEnterPressed(ClassicConsoleKeyboardHandler keyboardComponent, Cursor cursor, string value)
     {
         value = value.ToLower().Trim();
-        System.Console.WriteLine(value);
-        if (value.Equals("help"))
-        {
-            cursor.NewLine().
-                        Print("  Advanced Example: Command Prompt - HELP").NewLine().
-                        Print("  =======================================").NewLine().NewLine().
-                        Print("  help       - Display this help info").NewLine().
-                        Print("  ver        - Display version info").NewLine().
-                        Print("  cls        - Clear the screen").NewLine().
-                        Print("  look       - Look around in the current location").NewLine().
-                        Print("  move [dir] - Move in a specified direction").NewLine().
-                        Print("  directions - List possible directions to move").NewLine().
-                        Print("  ").NewLine();
-        }
-        else if (value == "ver")
-        {
-            cursor.Print("2024. Made with SadConsole for MonoGame").NewLine();
-        }
-        else if (value == "cls")
-        {
-            _promptScreen.Clear();
-            cursor.Position = new Point(0, 0);
-            _keyboardHandlerDOS.CursorLastY = cursor.Position.Y;
-        }
-        else if (value.StartsWith("move "))
-        {
-            string directionString = value.Substring(5); // Assuming 'move ' is 5 characters
-            if (Enum.TryParse<Direction>(directionString, true, out Direction direction))
-            {
-                var moveResult = GameWorld.Instance.Player.Move(direction);
-                cursor.Print(SadConsole.ColoredString.Parser.Parse(moveResult.message)).NewLine();
+        System.Console.WriteLine(value);  // Output the trimmed, lowercased value for debugging.
+        string outputText;
 
-                // Combine the description and the directions into one string
-                string outputText = GameWorld.Instance.Player.CurrentLocation.GetDescription() + " " +
-                                    GameWorld.Instance.Player.CurrentLocation.ListDirections();
-
-                // Print the combined text
+        switch (value)
+        {
+            case GameStrings.COMMAND_LOOK:
+                // Handle the 'look' command: Provide a description of the current location along with available directions.
+                cursor.DisableWordBreak = false;
+                outputText = GameWorld.Instance.Player.CurrentLocation.GetDescription() +
+                            " " + GameWorld.Instance.Player.CurrentLocation.ListDirections();
                 PrinterText(cursor, keyboardComponent, outputText);
-            }
-            else
-            {
-                cursor.Print("Unknown direction").NewLine();
-            }
-        }
-        else if (value == "look")
-        {
-            cursor.DisableWordBreak = false;
+                cursor.DisableWordBreak = true;
+                break;
+            
+            case GameStrings.COMMAND_DIRECTIONS:
+                // Handle the 'directions' command: List all possible directions the player can move from the current location.
+                outputText = GameWorld.Instance.Player.CurrentLocation.ListDirections();
+                PrinterText(cursor, keyboardComponent, outputText);
+                break;
+            
+            case var command when command.StartsWith(GameStrings.COMMAND_MOVE + " "):
+                // Handle the 'move' command with a direction: Move the player in the specified direction if valid.
+                string directionString = value.Substring(5); // Extract direction from command
+                if (Enum.TryParse<Direction>(directionString, true, out Direction direction))
+                {
+                    var moveResult = GameWorld.Instance.Player.Move(direction);
+                    cursor.Print(SadConsole.ColoredString.Parser.Parse(moveResult.message)).NewLine();
+                    outputText = GameWorld.Instance.Player.CurrentLocation.GetDescription() +
+                                " " + GameWorld.Instance.Player.CurrentLocation.ListDirections();
+                    PrinterText(cursor, keyboardComponent, outputText);
+                }
+                else
+                {
+                    cursor.Print(GameStrings.LOCATION_CANT_GO_THAT_WAY).NewLine();
+                }
+                break;
 
-            // Combine the description and the directions into one string
-            string outputText = GameWorld.Instance.Player.CurrentLocation.GetDescription() + " " +
-                                GameWorld.Instance.Player.CurrentLocation.ListDirections();
+            case GameStrings.COMMAND_HELP:
+                // Handle the 'help' command: Display a help menu with available commands.
+                cursor.NewLine()
+                    .Print("  Advanced Example: Command Prompt - HELP").NewLine()
+                    .Print("  =======================================").NewLine().NewLine()
+                    .Print("  help       - Display this help info").NewLine()
+                    .Print("  ver        - Display version info").NewLine()
+                    .Print("  cls        - Clear the screen").NewLine()
+                    .Print("  look       - Look around in the current location").NewLine()
+                    .Print("  move [dir] - Move in a specified direction").NewLine()
+                    .Print("  directions - List possible directions to move").NewLine()
+                    .Print("  ").NewLine();
+                break;
 
-            // Print the combined text
-            PrinterText(cursor, keyboardComponent, outputText);
+            case GameStrings.COMMAND_VER:
+                // Handle the 'ver' command: Display version information about the game.
+                cursor.Print("2024. Made with SadConsole for MonoGame").NewLine();
+                break;
+                
+            case GameStrings.COMMAND_CLS:
+                // Handle the 'cls' command: Clear the console screen.
+                _promptScreen.Clear();
+                cursor.Position = new Point(0, 0);
+                _keyboardHandlerDOS.CursorLastY = cursor.Position.Y;
+                break;
 
-            cursor.DisableWordBreak = true;
-        }
-        else
-        {
-            cursor.Print("  Unknown command").NewLine();
+            default:
+                // Handle unknown commands: Display a message indicating that the command is unrecognized.
+                cursor.Print(SadConsole.ColoredString.Parser.Parse(GameStrings.UNKNOWN_COMMAND)).NewLine();
+                break;
         }
     }
+
+
 
 
     //This method uses 'Typing Instructions', a built in feature of SadConsole to facilitate animated text.
