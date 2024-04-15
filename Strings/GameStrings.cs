@@ -23,6 +23,13 @@ namespace AdventureGame
         //Items
         public const string ITEM_TORCH_NAME = "Torch";
         public const string ITEM_TORCH_ENV_DESC = "Planted in the ground is a ";
+        public const string ITEM_BEAR_ENV_DESC = "Blocking our path to the north is a hibernating ";
+        public const string ITEM_BEAR_NAME = "Bear";
+        public const string ITEM_BEAR_DONT_PICK_ME_UP = "You can't fit a whole bear in your inventory!!";
+        public const string ITEM_FISH_NAME = "Fish";
+        public const string ITEM_FISH_ENV_DESC = "Flopping on the ground by the river is a fatty ";
+        public const string ITEM_FISH_PICKUP = "The fish is slimy and wiggles as you pick it up, but you manage to stuff it into your inventory.";
+        public const string ITEM_FISH_USE = "You offer the fish to the Bear as a gift so that you can head to the north. The Bear turns to you, gives a odd look, and simply says \"Sorry, I am vegan\" before walking away. The way north is now clear.";
         
         // Utility text
         public const string LOCATION_CANT_GO_THAT_WAY = "You can't go that way.";
@@ -36,13 +43,16 @@ namespace AdventureGame
         public const string DESCRIPTION_PREFIX = "You are at the ";
         public const string MOVE_PREFIX = "You move ";
         public const string MOVE_POSTFIX = " to the ";
+        public const string DIRECTION_INFIX = "is";
         public const string UNKNOWN_COMMAND = "You cannot do that. Type \"[c:r f:Cyan]help[c:undo]\" to get a list of commands";
-        public const string GAME_NAME = "[c:r f:Violet]☆*~`{Darkwoods}`~*☆[c:undo]";
+        public const string GAME_NAME = "[c:g f:Violet:DodgerBlue:19]☆*~`{Darkwoods}`~*☆[c:undo]";
         public const string GAME_START_LIST_COMMANDS = "COMMANDS: [c:r f:Cyan]move [dir], help, cls, ver[c:undo]";
         public const string PLAYER_INVENTORY_HEADER = "  Inventory List:";
         public const string PLAYER_INVENTORY_BAR = "  ===============";
         public const string PLAYER_INVENTORY_PREFIX = "  - ";
         public const string PLAYER_INVENTORY_NO_ITEMS = "No items in inventory.";
+        public const string PLAYER_ITEM_YOU_PICK_UP = "You pick up the ";
+        public const string PLAYER_CANT_USE_THAT_ITEM_HERE = "You cannot use that here.";
         // Commands
         public const string COMMAND_USE = "use";
         public const string COMMAND_PICKUP = "pickup";

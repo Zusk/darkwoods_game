@@ -40,27 +40,29 @@ public class GameWorld
         Location ruinedRiver = new RuinedRiver();
 
         // Set up neighbors
-        darkWood.AddNeighbor(Direction.North, mushroomCaves);
+        //darkWood.AddNeighbor(Direction.North, mushroomCaves);
         darkWood.AddNeighbor(Direction.West, greatLake);
         darkWood.AddNeighbor(Direction.South, ruinedRiver);
         darkWood.AddNeighbor(Direction.East, dungeonMasterTower1);
         darkWood.AddItem(new Torch());
+        darkWood.AddItem(new Bear());
 
         mushroomCaves.AddNeighbor(Direction.South, darkWood);
         greatLake.AddNeighbor(Direction.East, darkWood);
         ruinedRiver.AddNeighbor(Direction.North, darkWood);
+        greatLake.AddItem(new Fish());
 
         dungeonMasterTower1.AddNeighbor(Direction.West, darkWood);
         dungeonMasterTower1.AddNeighbor(Direction.Up, dungeonMasterTower2);
         dungeonMasterTower2.AddNeighbor(Direction.Down, dungeonMasterTower1);
 
         // Add locations to the dictionary with a unique key for each one
-        Locations.Add("DarkWood", darkWood);
-        Locations.Add("MushroomCaves", mushroomCaves);
-        Locations.Add("DungeonMasterTower1", dungeonMasterTower1);
-        Locations.Add("DungeonMasterTower2", dungeonMasterTower2);
-        Locations.Add("GreatLake", greatLake);
-        Locations.Add("RuinedRiver", ruinedRiver);
+        Locations.Add(GameStrings.DARK_WOOD_NAME, darkWood);
+        Locations.Add(GameStrings.MUSHROOM_CAVE_NAME, mushroomCaves);
+        Locations.Add(GameStrings.DUNGEON_MASTER_TOWER1_NAME, dungeonMasterTower1);
+        Locations.Add(GameStrings.DUNGEON_MASTER_TOWER2_NAME, dungeonMasterTower2);
+        Locations.Add(GameStrings.GREAT_LAKE_NAME, greatLake);
+        Locations.Add(GameStrings.RUINED_RIVER_NAME, ruinedRiver);
 
         // Initialize the player with a starting location
         Player = new Player(darkWood);

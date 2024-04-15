@@ -53,19 +53,19 @@ internal class KeyboardHandlers : ControlsConsole
 
         // Combine the strings
         string locationDescription = GameWorld.Instance.Player.CurrentLocation.GetDescription();
-        SadConsole.ColoredString directionList = SadConsole.ColoredString.Parser.Parse(GameWorld.Instance.Player.CurrentLocation.ListDirections());
+        SadConsole.ColoredString directionList = ParseColoredString(GameWorld.Instance.Player.CurrentLocation.ListDirections());
 
-        cursor.Print(SadConsole.ColoredString.Parser.Parse(GameStrings.GAME_NAME)).NewLine();
+        cursor.Print(ParseColoredString(GameStrings.GAME_NAME)).NewLine();
         cursor.NewLine();
 
         // Combine them into one ColoredString
-        SadConsole.ColoredString combinedText = SadConsole.ColoredString.Parser.Parse(locationDescription) + " "
+        SadConsole.ColoredString combinedText = ParseColoredString(locationDescription) + " "
                                             + directionList;
 
 
         // Print the combined text
         cursor.Print(combinedText).NewLine();
-        cursor.Print(SadConsole.ColoredString.Parser.Parse(GameStrings.GAME_START_LIST_COMMANDS)).NewLine();
+        cursor.Print(ParseColoredString(GameStrings.GAME_START_LIST_COMMANDS)).NewLine();
 
         _keyboardHandlerDOS.Prompt = "Prompt:";
         _keyboardHandlerDOS.IsReady = true;
@@ -125,11 +125,27 @@ internal class KeyboardHandlers : ControlsConsole
                 if (itemToPickup != null)
                 {
                     string pickupResult = itemToPickup.Pickup(GameWorld.Instance.Player, GameWorld.Instance.Player.CurrentLocation);
-                    cursor.Print(pickupResult).NewLine();
+                    cursor.Print(ParseColoredString(pickupResult)).NewLine();
                 }
                 else
                 {
                     cursor.Print($"There isn't an item named '{itemName}' here.").NewLine();
+                }
+                break;
+
+            case var command when command.StartsWith("use "):
+                string useItemName = command.Substring(4).Trim(); // Extract the item name from the command
+                Item? itemToUse = GameWorld.Instance.Player.Inventory
+                    .FirstOrDefault(item => item.Name.ToLower() == useItemName);
+
+                if (itemToUse != null)
+                {
+                    string useResult = itemToUse.Use(GameWorld.Instance.Player);
+                    cursor.Print(useResult).NewLine();
+                }
+                else
+                {
+                    cursor.Print($"You don't have a {useItemName}.").NewLine();
                 }
                 break;
 
@@ -152,7 +168,7 @@ internal class KeyboardHandlers : ControlsConsole
                 if (Enum.TryParse<Direction>(directionString, true, out Direction direction))
                 {
                     var moveResult = GameWorld.Instance.Player.Move(direction);
-                    cursor.Print(SadConsole.ColoredString.Parser.Parse(moveResult.message)).NewLine();
+                    cursor.Print(ParseColoredString(moveResult.message)).NewLine();
                     outputText = GameWorld.Instance.Player.CurrentLocation.GetDescription() +
                                 " " + GameWorld.Instance.Player.CurrentLocation.ListDirections();
                     PrinterText(cursor, keyboardComponent, outputText);
@@ -209,19 +225,21 @@ internal class KeyboardHandlers : ControlsConsole
 
             default:
                 // Handle unknown commands: Display a message indicating that the command is unrecognized.
-                cursor.Print(SadConsole.ColoredString.Parser.Parse(GameStrings.UNKNOWN_COMMAND)).NewLine();
+                cursor.Print(ParseColoredString(GameStrings.UNKNOWN_COMMAND)).NewLine();
                 break;
         }
     }
 
-
-
+    private static ColoredString ParseColoredString(string text)
+    {
+        return ColoredString.Parser.Parse(text);
+    }
 
     //This method uses 'Typing Instructions', a built in feature of SadConsole to facilitate animated text.
     private void PrinterText(Cursor _cursor, ClassicConsoleKeyboardHandler _keyboardComponent, String _string){
         //Define our instruction. This uses 'Draw String' - a instruction that gradually draws the text over time.
         var _typingInstruction = new SadConsole.Instructions
-            .DrawString(SadConsole.ColoredString.Parser.Parse(_string));
+            .DrawString(ParseColoredString(_string));
 
         //Define values of our instruction.
         _typingInstruction.Position = _cursor.Position;

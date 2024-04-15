@@ -22,6 +22,7 @@ public abstract class Location
         Items.Add(item);
     }
 
+    //This gets the description of the location, and adds the items in the location if any items are there.
     public virtual string GetDescription()
     {
         string fullDescription = $"{GameStrings.DESCRIPTION_PREFIX}{Name}. {Description}";
@@ -51,7 +52,7 @@ public abstract class Location
         foreach (var neighbor in Neighbors)
         {
             string directionText = DirectionToString(neighbor.Key);
-            directions.Add($"{directionText} is {neighbor.Value.Name}");
+            directions.Add($"{directionText} {GameStrings.DIRECTION_INFIX} {neighbor.Value.Name}");
         }
         return string.Join(", ", directions);
     }
@@ -70,6 +71,8 @@ public abstract class Location
         };
     }
 
+    //Format is...
+    //[You move] [north] [to the] [Mushroom Cave]
     public (Location newLocation, string message) Move(Direction direction)
     {
         if (Neighbors.ContainsKey(direction))
