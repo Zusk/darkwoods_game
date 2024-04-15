@@ -44,6 +44,7 @@ public class GameWorld
         darkWood.AddNeighbor(Direction.West, greatLake);
         darkWood.AddNeighbor(Direction.South, ruinedRiver);
         darkWood.AddNeighbor(Direction.East, dungeonMasterTower1);
+        darkWood.AddItem(new Torch());
 
         mushroomCaves.AddNeighbor(Direction.South, darkWood);
         greatLake.AddNeighbor(Direction.East, darkWood);

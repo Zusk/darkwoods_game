@@ -1,0 +1,84 @@
+using System;
+using System.Collections.Generic;
+namespace AdventureGame;
+
+public abstract class Location
+{
+    public string Name { get; set; }
+    protected string Description { get; set; }  // Store the specific description for each location
+    public Dictionary<Direction, Location> Neighbors { get; set; }
+    public List<Item> Items { get; private set; }
+
+    protected Location(string name, string description)
+    {
+        Name = name;
+        Description = description;
+        Neighbors = new Dictionary<Direction, Location>();
+        Items = new List<Item>();
+    }
+
+    public void AddItem(Item item)
+    {
+        Items.Add(item);
+    }
+
+    public virtual string GetDescription()
+    {
+        string fullDescription = $"{GameStrings.DESCRIPTION_PREFIX}{Name}. {Description}";
+        if (Items.Count > 0)
+        {
+            fullDescription += " " + string.Join(" ", ListItems());
+        }
+        return fullDescription;
+    }
+
+    private IEnumerable<string> ListItems()
+    {
+        foreach (Item item in Items)
+        {
+            yield return item.GetDisplayText();
+        }
+    }
+
+    public void AddNeighbor(Direction direction, Location neighbor)
+    {
+        Neighbors[direction] = neighbor;
+    }
+
+    public string ListDirections()
+    {
+        var directions = new List<string>();
+        foreach (var neighbor in Neighbors)
+        {
+            string directionText = DirectionToString(neighbor.Key);
+            directions.Add($"{directionText} is {neighbor.Value.Name}");
+        }
+        return string.Join(", ", directions);
+    }
+
+    private string DirectionToString(Direction direction)
+    {
+        return direction switch
+        {
+            Direction.North => GameStrings.LOCATION_NORTH,
+            Direction.South => GameStrings.LOCATION_SOUTH,
+            Direction.East => GameStrings.LOCATION_EAST,
+            Direction.West => GameStrings.LOCATION_WEST,
+            Direction.Up => GameStrings.LOCATION_UP,
+            Direction.Down => GameStrings.LOCATION_DOWN,
+            _ => GameStrings.LOCATION_UNKNOWN_DIRECTION
+        };
+    }
+
+    public (Location newLocation, string message) Move(Direction direction)
+    {
+        if (Neighbors.ContainsKey(direction))
+        {
+            return (Neighbors[direction], $"{GameStrings.MOVE_PREFIX}{direction}{GameStrings.MOVE_POSTFIX}{Neighbors[direction].Name}.");
+        }
+        else
+        {
+            return (this, GameStrings.LOCATION_CANT_GO_THAT_WAY);
+        }
+    }
+}

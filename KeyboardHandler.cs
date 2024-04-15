@@ -59,13 +59,13 @@ internal class KeyboardHandlers : ControlsConsole
         cursor.NewLine();
 
         // Combine them into one ColoredString
-        SadConsole.ColoredString combinedText = new SadConsole.ColoredString(locationDescription) + " "
-                                            + directionList
-                                            + SadConsole.ColoredString.Parser.Parse(GameStrings.GAME_START_LIST_COMMANDS);
+        SadConsole.ColoredString combinedText = SadConsole.ColoredString.Parser.Parse(locationDescription) + " "
+                                            + directionList;
 
 
         // Print the combined text
         cursor.Print(combinedText).NewLine();
+        cursor.Print(SadConsole.ColoredString.Parser.Parse(GameStrings.GAME_START_LIST_COMMANDS)).NewLine();
 
         _keyboardHandlerDOS.Prompt = "Prompt:";
         _keyboardHandlerDOS.IsReady = true;
@@ -117,6 +117,22 @@ internal class KeyboardHandlers : ControlsConsole
 
         switch (value)
         {
+            case var command when command.StartsWith(GameStrings.COMMAND_PICKUP + " "):
+                string itemName = command.Substring((GameStrings.COMMAND_PICKUP + " ").Length).Trim();
+                Item? itemToPickup = GameWorld.Instance.Player.CurrentLocation.Items
+                    .FirstOrDefault(item => item.Name.ToLower() == itemName);
+
+                if (itemToPickup != null)
+                {
+                    string pickupResult = itemToPickup.Pickup(GameWorld.Instance.Player, GameWorld.Instance.Player.CurrentLocation);
+                    cursor.Print(pickupResult).NewLine();
+                }
+                else
+                {
+                    cursor.Print($"There isn't an item named '{itemName}' here.").NewLine();
+                }
+                break;
+
             case GameStrings.COMMAND_LOOK:
                 // Handle the 'look' command: Provide a description of the current location along with available directions.
                 outputText = GameWorld.Instance.Player.CurrentLocation.GetDescription() +
@@ -144,6 +160,24 @@ internal class KeyboardHandlers : ControlsConsole
                 else
                 {
                     cursor.Print(GameStrings.LOCATION_CANT_GO_THAT_WAY).NewLine();
+                }
+                break;
+
+            case GameStrings.COMMAND_INVENTORY:
+                // Handle the 'inventory' command: List all items in the player's inventory.
+                cursor.NewLine()
+                    .Print(GameStrings.PLAYER_INVENTORY_HEADER).NewLine()
+                    .Print(GameStrings.PLAYER_INVENTORY_BAR).NewLine();
+                if (GameWorld.Instance.Player.Inventory.Count == 0)
+                {
+                    cursor.Print(GameStrings.PLAYER_INVENTORY_PREFIX + GameStrings.PLAYER_INVENTORY_NO_ITEMS).NewLine();
+                }
+                else
+                {
+                    foreach (Item item in GameWorld.Instance.Player.Inventory)
+                    {
+                        cursor.Print($"{GameStrings.PLAYER_INVENTORY_PREFIX}{item.Name}").NewLine();
+                    }
                 }
                 break;
 
