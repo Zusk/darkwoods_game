@@ -20,6 +20,7 @@ namespace AdventureGame
         public const string ALIAS_KEY_GET = "get";
         public const string ALIAS_KEY_PICK = "pick";
         public const string ALIAS_KEY_PICK_UP = "pick up";
+        public const string ALIAS_KEY_GRAB = "grab";
         public const string ALIAS_KEY_P = "p";
         public const string ALIAS_KEY_US = "us";
         public const string ALIAS_KEY_U = "u";
@@ -63,6 +64,7 @@ namespace AdventureGame
             {ALIAS_KEY_PICK, COMMAND_PICKUP},
             {ALIAS_KEY_PICK_UP, COMMAND_PICKUP},
             {ALIAS_KEY_P, COMMAND_PICKUP},
+            {ALIAS_KEY_GRAB, COMMAND_PICKUP},
             {ALIAS_KEY_US, COMMAND_USE},
             {ALIAS_KEY_U, COMMAND_USE},
             {ALIAS_KEY_UTILIZE, COMMAND_USE},
@@ -109,11 +111,11 @@ namespace AdventureGame
         public const string ITEM_TORCH_ENV_DESC = "Planted in the ground is a ";
         public const string ITEM_BEAR_ENV_DESC = "Blocking our path to the north is a hibernating ";
         public const string ITEM_BEAR_NAME = "Bear";
-        public const string ITEM_BEAR_DONT_PICK_ME_UP = "You can't fit a whole bear in your inventory!!";
+        public const string ITEM_BEAR_DONT_PICK_ME_UP = "You can't fit a whole [c:r f:Lime]Bear[c:undo] in your inventory!!";
         public const string ITEM_FISH_NAME = "Fish";
         public const string ITEM_FISH_ENV_DESC = "Flopping on the ground by the river is a fatty ";
-        public const string ITEM_FISH_PICKUP = "The fish is slimy and wiggles as you pick it up, but you manage to stuff it into your inventory.";
-        public const string ITEM_FISH_USE = "You offer the fish to the Bear as a gift so that you can head to the north. The Bear turns to you, gives a odd look, and simply says \"Sorry, I am vegan\" before walking away. The way north is now clear.";
+        public const string ITEM_FISH_PICKUP = "The [c:r f:Lime]Fish[c:undo] is slimy and wiggles as you pick it up, but you manage to stuff it into your inventory.";
+        public const string ITEM_FISH_USE = "You offer the [c:r f:Lime]Fish[c:undo] to the [c:r f:Lime]Bear[c:undo] as a gift so that you can head to the north. The [c:r f:Lime]Bear[c:undo] turns to you, gives a condescending look, and simply says [c:r f:Violet]\"Sorry, I am vegan.\"[c:undo] before walking away. The way [c:r f:Cyan]north[c:undo] is now clear.";
         
         // Utility text
         public const string LOCATION_CANT_GO_THAT_WAY = "You can't go that way.";
@@ -137,6 +139,7 @@ namespace AdventureGame
         public const string PLAYER_INVENTORY_NO_ITEMS = "No items in inventory.";
         public const string PLAYER_ITEM_YOU_PICK_UP = "You pick up the ";
         public const string PLAYER_CANT_USE_THAT_ITEM_HERE = "You cannot use that here.";
+        public const string PLAYER_DONT_HAVE_A_ITEM = "You do not have a ";
         public const string PLAYER_NO_ITEM_NAMED_THAT_PREFIX = "There isn't an item named '";
         public const string PLAYER_NO_ITEM_NAMED_THAT_SUFFIX = "' here.";
         // Commands

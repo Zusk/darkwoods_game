@@ -108,23 +108,24 @@ internal class KeyboardHandlers : ControlsConsole
         _promptScreen.Surface.TimesShiftedUp = 0;
     }
 
-    //This method is called by our KeyBoardHandler when the enter key is pressed.
-    private void DOSHandlerEnterPressed(ClassicConsoleKeyboardHandler keyboardComponent, Cursor cursor, string value)
+    //This method parses the command the user input, returning a corrected string.
+    private string ParseRawCommand(string rawInput)
     {
-        value = value.ToLower().Trim();
-        System.Console.WriteLine(value);  // Debugging output
+        // Normalize the input to lowercase and remove leading/trailing whitespace for consistent processing.
+        rawInput = rawInput.ToLower().Trim();
+        System.Console.WriteLine(rawInput);  // Output the processed command for debugging purposes.
 
-
-        //First off, we replace special aliases. These have to be done seperately, because they have spaces in them.
-        if (value.StartsWith(GameStrings.ALIAS_KEY_PICK_UP + " ")) {
-            value = string.Concat(GameStrings.COMMAND_PICKUP, value.AsSpan(GameStrings.ALIAS_KEY_PICK_UP.Length));
+        // Special handling for phrases with spaces, like "pick up", which should be interpreted as "pickup".
+        if (rawInput.StartsWith(GameStrings.ALIAS_KEY_PICK_UP + " ")) {
+            rawInput = string.Concat(GameStrings.COMMAND_PICKUP, rawInput.AsSpan(GameStrings.ALIAS_KEY_PICK_UP.Length));
         }
-        // Now split the possibly modified command into action and arguments
-        string[] parts = value.Split([' '], 2);
-        string commandAction = parts[0];  // The action part of the command
-        string commandArgs = parts.Length > 1 ? parts[1] : "";  // The arguments
 
-        // Rebuild the full command if there were aliases for single parts
+        // Split the modified command string into the command action and its arguments.
+        string[] parts = rawInput.Split(new[] {' '}, 2);
+        string commandAction = parts[0];  // Extract the action part (first word).
+        string commandArgs = parts.Length > 1 ? parts[1] : "";  // Extract the argument part (rest of the string).
+
+        // Replace the action or arguments with their canonical forms if aliases are used.
         if (GameStrings.CommandAliases.TryGetValue(commandAction, out string? actionReplacement)) {
             commandAction = actionReplacement;
         }
@@ -132,10 +133,15 @@ internal class KeyboardHandlers : ControlsConsole
             commandArgs = argsReplacement;
         }
 
-        //Builds the unified command statement, now that we have replaced all of the aliases in the users command.
-        value = commandAction + (commandArgs.Length > 0 ? " " + commandArgs : "");
+        // Rebuild the full command using the possibly replaced action and arguments.
+        return commandAction + (commandArgs.Length > 0 ? " " + commandArgs : "");
+    }
 
 
+    //This method is called by our KeyBoardHandler when the enter key is pressed.
+    private void DOSHandlerEnterPressed(ClassicConsoleKeyboardHandler keyboardComponent, Cursor cursor, string value)
+    {
+        value = ParseRawCommand(value);  // Parse and normalize the input command.
         string outputText;
 
         switch (value)
@@ -148,7 +154,7 @@ internal class KeyboardHandlers : ControlsConsole
                 if (itemToPickup != null)
                 {
                     string pickupResult = itemToPickup.Pickup(GameWorld.Instance.Player, GameWorld.Instance.Player.CurrentLocation);
-                    cursor.Print(ParseColoredString(pickupResult)).NewLine();
+                    PrinterText(cursor, keyboardComponent, pickupResult);
                 }
                 else
                 {
@@ -156,7 +162,7 @@ internal class KeyboardHandlers : ControlsConsole
                 }
                 break;
 
-            case var command when command.StartsWith("use "):
+            case var command when command.StartsWith(GameStrings.COMMAND_USE + " "):
                 string useItemName = command.Substring(4).Trim(); // Extract the item name from the command
                 Item? itemToUse = GameWorld.Instance.Player.Inventory
                     .FirstOrDefault(item => item.Name.ToLower() == useItemName);
@@ -164,11 +170,12 @@ internal class KeyboardHandlers : ControlsConsole
                 if (itemToUse != null)
                 {
                     string useResult = itemToUse.Use(GameWorld.Instance.Player);
-                    cursor.Print(useResult).NewLine();
+                    PrinterText(cursor, keyboardComponent, useResult);
                 }
                 else
                 {
-                    cursor.Print($"You don't have a {useItemName}.").NewLine();
+                    string noItemResult = $"{GameStrings.PLAYER_DONT_HAVE_A_ITEM}{useItemName}.";
+                    PrinterText(cursor, keyboardComponent, noItemResult);
                 }
                 break;
 
@@ -270,7 +277,8 @@ internal class KeyboardHandlers : ControlsConsole
         //Define values of our instruction.
         _typingInstruction.Position = _cursor.Position;
         _typingInstruction.Cursor = _cursor;
-        _typingInstruction.TotalTimeToPrint = TimeSpan.FromSeconds(4);
+        float timeToType = MathF.Max((_string.Length * 0.005f) + 0.4f, 0.5f);
+        _typingInstruction.TotalTimeToPrint = TimeSpan.FromSeconds(timeToType);
         //When the typing instruction is finished, call this event.
         _typingInstruction.Finished += _typingInstruction_Finished;
         _typingInstruction.RemoveOnFinished = true;
