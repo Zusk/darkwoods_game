@@ -112,7 +112,30 @@ internal class KeyboardHandlers : ControlsConsole
     private void DOSHandlerEnterPressed(ClassicConsoleKeyboardHandler keyboardComponent, Cursor cursor, string value)
     {
         value = value.ToLower().Trim();
-        System.Console.WriteLine(value);  // Output the trimmed, lowercased value for debugging.
+        System.Console.WriteLine(value);  // Debugging output
+
+
+        //First off, we replace special aliases. These have to be done seperately, because they have spaces in them.
+        if (value.StartsWith(GameStrings.ALIAS_KEY_PICK_UP + " ")) {
+            value = string.Concat(GameStrings.COMMAND_PICKUP, value.AsSpan(GameStrings.ALIAS_KEY_PICK_UP.Length));
+        }
+        // Now split the possibly modified command into action and arguments
+        string[] parts = value.Split([' '], 2);
+        string commandAction = parts[0];  // The action part of the command
+        string commandArgs = parts.Length > 1 ? parts[1] : "";  // The arguments
+
+        // Rebuild the full command if there were aliases for single parts
+        if (GameStrings.CommandAliases.TryGetValue(commandAction, out string? actionReplacement)) {
+            commandAction = actionReplacement;
+        }
+        if (commandArgs.Length > 0 && GameStrings.CommandAliases.TryGetValue(commandArgs, out string? argsReplacement)) {
+            commandArgs = argsReplacement;
+        }
+
+        //Builds the unified command statement, now that we have replaced all of the aliases in the users command.
+        value = commandAction + (commandArgs.Length > 0 ? " " + commandArgs : "");
+
+
         string outputText;
 
         switch (value)
@@ -129,7 +152,7 @@ internal class KeyboardHandlers : ControlsConsole
                 }
                 else
                 {
-                    cursor.Print($"There isn't an item named '{itemName}' here.").NewLine();
+                    cursor.Print($"{GameStrings.PLAYER_NO_ITEM_NAMED_THAT_PREFIX}{itemName}{GameStrings.PLAYER_NO_ITEM_NAMED_THAT_SUFFIX}").NewLine();
                 }
                 break;
 
@@ -202,12 +225,15 @@ internal class KeyboardHandlers : ControlsConsole
                 cursor.NewLine()
                     .Print("  Advanced Example: Command Prompt - HELP").NewLine()
                     .Print("  =======================================").NewLine().NewLine()
-                    .Print("  help       - Display this help info").NewLine()
-                    .Print("  ver        - Display version info").NewLine()
-                    .Print("  cls        - Clear the screen").NewLine()
-                    .Print("  look       - Look around in the current location").NewLine()
-                    .Print("  move [dir] - Move in a specified direction").NewLine()
-                    .Print("  directions - List possible directions to move").NewLine()
+                    .Print("  help          - Display this help info").NewLine()
+                    .Print("  ver           - Display version info").NewLine()
+                    .Print("  cls           - Clear the screen").NewLine()
+                    .Print("  look          - Look around in the current location").NewLine()
+                    .Print("  move [dir]    - Move in a specified direction").NewLine()
+                    .Print("  directions    - List possible directions to move").NewLine()
+                    .Print("  inventory     - List our current items").NewLine()
+                    .Print("  pickup [item] - Picks up a item and adds it to your inventory").NewLine()
+                    .Print("  use [item]    - Attempts to use an item in your inventory.")
                     .Print("  ").NewLine();
                 break;
 
