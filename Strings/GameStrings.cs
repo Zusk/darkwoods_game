@@ -47,6 +47,7 @@ namespace AdventureGame
         public const string ALIAS_KEY_E = "e";
         public const string ALIAS_KEY_W = "w";
 
+        //This dictionary connects 'aliases' with commands. Its to allow alternative commands, like using 'mv' as a shorthand for move.
         public static readonly Dictionary<string, string> CommandAliases = new Dictionary<string, string>
         {
             {ALIAS_KEY_TRAVEL, COMMAND_MOVE},

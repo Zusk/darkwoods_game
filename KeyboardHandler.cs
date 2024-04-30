@@ -148,8 +148,7 @@ internal class KeyboardHandlers : ControlsConsole
         {
             case var command when command.StartsWith(GameStrings.COMMAND_PICKUP + " "):
                 string itemName = command.Substring((GameStrings.COMMAND_PICKUP + " ").Length).Trim();
-                Item? itemToPickup = GameWorld.Instance.Player.CurrentLocation.Items
-                    .FirstOrDefault(item => item.Name.ToLower() == itemName);
+                Item? itemToPickup = GameWorld.Instance.Player.CurrentLocation.GetItem(itemName);
 
                 if (itemToPickup != null)
                 {
@@ -164,8 +163,7 @@ internal class KeyboardHandlers : ControlsConsole
 
             case var command when command.StartsWith(GameStrings.COMMAND_USE + " "):
                 string useItemName = command.Substring(4).Trim(); // Extract the item name from the command
-                Item? itemToUse = GameWorld.Instance.Player.Inventory
-                    .FirstOrDefault(item => item.Name.ToLower() == useItemName);
+                Item? itemToUse = GameWorld.Instance.Player.GetItem(useItemName);
 
                 if (itemToUse != null)
                 {
@@ -230,7 +228,7 @@ internal class KeyboardHandlers : ControlsConsole
             case GameStrings.COMMAND_HELP:
                 // Handle the 'help' command: Display a help menu with available commands.
                 cursor.NewLine()
-                    .Print("  Advanced Example: Command Prompt - HELP").NewLine()
+                    .Print("  Command Prompt - HELP").NewLine()
                     .Print("  =======================================").NewLine().NewLine()
                     .Print("  help          - Display this help info").NewLine()
                     .Print("  ver           - Display version info").NewLine()
@@ -277,6 +275,8 @@ internal class KeyboardHandlers : ControlsConsole
         //Define values of our instruction.
         _typingInstruction.Position = _cursor.Position;
         _typingInstruction.Cursor = _cursor;
+        //This just assigns the 'toprint' time as either 0,5, or 0.4 + a tiny value for each character. It ensures that longer texts take
+        //a while to print, but smaller ones still have a minimum print time.
         float timeToType = MathF.Max((_string.Length * 0.005f) + 0.4f, 0.5f);
         _typingInstruction.TotalTimeToPrint = TimeSpan.FromSeconds(timeToType);
         //When the typing instruction is finished, call this event.

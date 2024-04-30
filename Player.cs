@@ -34,5 +34,17 @@ namespace AdventureGame
         {
             return Inventory.Remove(item);
         }
+
+        // Generic method to get an item of a specific type from the player's inventory
+        public T GetItem<T>() where T : Item
+        {
+            return Inventory.OfType<T>().FirstOrDefault();
+        }
+
+        // Method overload to get an item by its name from the player's inventory
+        public Item GetItem(string itemName)
+        {
+            return Inventory.FirstOrDefault(item => item.Name.Equals(itemName, StringComparison.OrdinalIgnoreCase));
+        }
     }
 }

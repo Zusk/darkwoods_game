@@ -16,7 +16,7 @@ public class Fish : Item
     public override string Use(Player player)
     {
         // Check if there's a bear in the player's current location
-        var bear = player.CurrentLocation.Items.FirstOrDefault(item => item is Bear);
+        Bear bear = player.CurrentLocation.GetItem<Bear>();
         if (bear != null)
         {
             // If bear is present, remove it and allow passage
