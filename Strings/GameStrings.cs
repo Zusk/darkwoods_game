@@ -111,10 +111,30 @@ namespace AdventureGame
         public const string ITEM_TORCH_NAME = "Torch";
         public const string ITEM_TORCH_ENV_DESC = "Planted in the ground is a ";
         public const string ITEM_BEAR_ENV_DESC = "Blocking our path to the north is a hibernating ";
+
+        public const string ITEM_DOOR = "Door";
+        public const string ITEM_DOOR_ENV_DESC = "Blocking our way into the tower is a sealed ";
+        public const string ITEM_DUNGEON_MASTER = "Dungeon Master";
+        public const string ITEM_DUNGEON_MASTER_ENV_DESC = "Conducting a vile ritual behind his protective wards is the evil ";
+
+        public const string ITEM_DUNGEON_MASTER_DONT_PICK_ME_UP = "The [c:r f:Lime]Dungeon Master[c:undo]'s protective wards prevent you from stopping him!";
+
+        public const string ITEM_DARKNESS = "Darkness";
+        public const string ITEM_DARKNESS_ENV_DESC = "It is hard to see too deeply into the cave due to an enveloping ";
         public const string ITEM_BEAR_NAME = "Bear";
         public const string ITEM_BEAR_DONT_PICK_ME_UP = "You can't fit a whole [c:r f:Lime]Bear[c:undo] in your inventory!!";
         public const string ITEM_FISH_NAME = "Fish";
         public const string ITEM_FISH_ENV_DESC = "Flopping on the ground by the river is a fatty ";
+    
+        public const string ITEM_EXCALIBUR_NAME = "Excalibur";
+        public const string ITEM_EXCALIBUR_ENV_DESC = "Stabbed into the throne of the old king is the greatsword ";
+        public const string ITEM_EXCALIBUR_PICKUP = "It's here that the Dungeon Master defeated the old king and took control of the realm. With much effort, you are able to pull the sword from the ruined throne. As you do, a stone shifts - opening the way [c:r f:Lime]up[c:undo] further into the tower.";
+
+
+        public const string ITEM_KEY_NAME = "Key";
+        public const string ITEM_KEY_ENV_DESC = "The torches light reveals a ";
+        public const string ITEM_KEY_USE = "You use the [c:r f:Lime]Key[c:undo] to unlock the door! With the door open, you can see into the tower. Against the wall of the entry room, the greatsword [c:r f:Lime]Excalibur[c:undo] sits. It is plunged into the throne of the old king.";
+  
         public const string ITEM_FISH_PICKUP = "The [c:r f:Lime]Fish[c:undo] is slimy and wiggles as you pick it up, but you manage to stuff it into your inventory.";
         public const string ITEM_FISH_USE = "You offer the [c:r f:Lime]Fish[c:undo] to the [c:r f:Lime]Bear[c:undo] as a gift so that you can head to the north. The [c:r f:Lime]Bear[c:undo] turns to you, gives a condescending look, and simply says [c:r f:Violet]\"Sorry, I am vegan.\"[c:undo] before walking away. The way [c:r f:Cyan]north[c:undo] is now clear.";
         
@@ -140,6 +160,7 @@ namespace AdventureGame
         public const string PLAYER_INVENTORY_NO_ITEMS = "No items in inventory.";
         public const string PLAYER_ITEM_YOU_PICK_UP = "You pick up the ";
         public const string PLAYER_CANT_USE_THAT_ITEM_HERE = "You cannot use that here.";
+        public const string PLAYER_CANNOT_PICK_THAT_UP = "You cannot pick that up.";
         public const string PLAYER_DONT_HAVE_A_ITEM = "You do not have a ";
         public const string PLAYER_NO_ITEM_NAMED_THAT_PREFIX = "There isn't an item named '";
         public const string PLAYER_NO_ITEM_NAMED_THAT_SUFFIX = "' here.";
@@ -153,5 +174,6 @@ namespace AdventureGame
         public const string COMMAND_CLS = "cls";
         public const string COMMAND_HELP = "help";
         public const string COMMAND_INVENTORY = "inventory";
+        public const string GAME_WIN = "With one strike of Excalibur, you are able to break the Dungeon Master's seals and apprehend the mad wizard. [c:r f:Violet]\"I will get you some day, hero!\"[c:undo] The Wizard curses under his breath as he is shoved into a police car and driven off to prison. Thanks to your efforts the kingdom has been restored.      [c:g f:Violet:DodgerBlue:19]YOU WIN THE GAME!!![c:undo]      ";
     }
 }

@@ -195,6 +195,11 @@ internal class KeyboardHandlers : ControlsConsole
                 string directionString = value.Substring(5); // Extract direction from command
                 if (Enum.TryParse<Direction>(directionString, true, out Direction direction))
                 {
+                    //Clear the terminal when we move to a new location
+                    _promptScreen.Clear();
+                    cursor.Position = new Point(0, 0);
+                    _keyboardHandlerDOS.CursorLastY = cursor.Position.Y;
+                    //Process the move result
                     var moveResult = GameWorld.Instance.Player.Move(direction);
                     cursor.Print(ParseColoredString(moveResult.message)).NewLine();
                     outputText = GameWorld.Instance.Player.CurrentLocation.GetDescription() +

@@ -44,16 +44,19 @@ public class GameWorld
         darkWood.AddNeighbor(Direction.West, greatLake);
         darkWood.AddNeighbor(Direction.South, ruinedRiver);
         darkWood.AddNeighbor(Direction.East, dungeonMasterTower1);
-        darkWood.AddItem(new Torch());
         darkWood.AddItem(new Bear());
+        mushroomCaves.AddItem(new Darkness());
+        ruinedRiver.AddItem(new Torch());
+        greatLake.AddItem(new Fish());
+        dungeonMasterTower1.AddItem(new Door());
+        dungeonMasterTower2.AddItem(new DungeonMaster());
 
         mushroomCaves.AddNeighbor(Direction.South, darkWood);
         greatLake.AddNeighbor(Direction.East, darkWood);
         ruinedRiver.AddNeighbor(Direction.North, darkWood);
-        greatLake.AddItem(new Fish());
 
         dungeonMasterTower1.AddNeighbor(Direction.West, darkWood);
-        dungeonMasterTower1.AddNeighbor(Direction.Up, dungeonMasterTower2);
+        //dungeonMasterTower1.AddNeighbor(Direction.Up, dungeonMasterTower2);
         dungeonMasterTower2.AddNeighbor(Direction.Down, dungeonMasterTower1);
 
         // Add locations to the dictionary with a unique key for each one

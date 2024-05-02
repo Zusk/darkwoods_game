@@ -1,7 +1,7 @@
 using AdventureGame;
 
-//Feels weird to have bears be items, since technically they are more creatures or NPC's?
-//We'd have to make a alternative set of very similar logic for creatures or NPC's.
+//Feels weird to have bears be items, since technically they are more creatures or NPCs?
+//We'd have to make a alternative set of very similar logic for creatures or NPCs.
 public class Bear : Item
 {
     public Bear() : base(GameStrings.ITEM_BEAR_NAME, GameStrings.ITEM_BEAR_ENV_DESC)
